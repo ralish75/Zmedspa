@@ -1,0 +1,24 @@
+{
+  "items": [
+    {
+      "image": "images/procedure.png",
+      "alt": "Dr. Kishim performing a laser procedure, wearing a mask and protective eyewear",
+      "caption": "A laser procedure"
+    },
+    {
+      "image": "images/laser-room.jpg",
+      "alt": "Laser machines and a cryotherapy flask in the clinic treatment room",
+      "caption": "The treatment room, with laser machines and cryotherapy"
+    },
+    {
+      "image": "images/portrait.jpg",
+      "alt": "Dr. Ismaila Kishim in blue scrubs",
+      "caption": "Dr. Ismaila Kishim"
+    },
+    {
+      "image": "images/certificate.jpg",
+      "alt": "Dr. Kishim receiving a fellowship certificate at the Institute of Dermatology, Bangkok",
+      "caption": "Fellowship certificate, Institute of Dermatology, Bangkok"
+    }
+  ]
+}

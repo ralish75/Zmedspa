@@ -1,0 +1,63 @@
+# Site editor settings (Decap CMS). Opens at /admin once the site is live.
+# Before first use: replace OWNER/REPO below with the real GitHub repository.
+backend:
+  name: github
+  repo: OWNER/REPO
+  branch: main
+  base_url: https://api.netlify.com
+  auth_endpoint: auth
+
+media_folder: "images"
+public_folder: "images"
+
+collections:
+  - name: blog
+    label: Blog articles
+    label_singular: Article
+    folder: content/blog
+    extension: md
+    format: frontmatter
+    create: true
+    slug: "{{slug}}"
+    sort: "date:desc"
+    summary: "{{title}}"
+    fields:
+      - { label: Title, name: title, widget: string }
+      - { label: Topic, name: tag, widget: select, options: [Skin, Hair, Nails, Aesthetic, Laser, Surgery, Allergy, Your visit] }
+      - { label: Short summary, name: summary, widget: text, hint: "One or two sentences shown on the blog list." }
+      - { label: Date, name: date, widget: datetime, format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false }
+      - label: Article
+        name: body
+        widget: markdown
+        buttons: [bold, link, heading-two, bulleted-list]
+        editor_components: []
+        hint: "Use Heading 2 for section titles and bullet lists for points."
+
+  - name: pages
+    label: Site content
+    files:
+      - label: FAQ
+        name: faq
+        file: content/faq.json
+        format: json
+        fields:
+          - label: Questions
+            name: items
+            widget: list
+            summary: "{{fields.question}}"
+            fields:
+              - { label: Question, name: question, widget: string }
+              - { label: Answer, name: answer, widget: text }
+      - label: Gallery
+        name: gallery
+        file: content/gallery.json
+        format: json
+        fields:
+          - label: Photos
+            name: items
+            widget: list
+            summary: "{{fields.caption}}"
+            fields:
+              - { label: Photo, name: image, widget: image }
+              - { label: Description for screen readers, name: alt, widget: string, hint: "Describe what the photo shows." }
+              - { label: Caption, name: caption, widget: string }

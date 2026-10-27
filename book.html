@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Request an in-person or online dermatology appointment with Dr. Ismaila Kishim in Gwarinpa, Abuja.">
+<meta name="color-scheme" content="light dark">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Book an Appointment | Dr. Ismaila Kishim">
+<meta property="og:description" content="Request an in-person or online dermatology appointment with Dr. Ismaila Kishim in Gwarinpa, Abuja.">
+<link rel="icon" type="image/png" href="logo.png">
+<title>Book an Appointment | Dr. Ismaila Kishim</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500;600;700&display=swap">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="wrap">
+  <header class="top">
+    <a class="brand" href="index.html" style="text-decoration:none"><img src="logo.png" alt="Zmedspa logo" width="44" height="44"><span>Zmedspa<small>Dr. Ismaila Kishim, Dermatology</small></span></a>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
+    <nav id="site-nav" aria-label="Main">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="treatments.html">Treatments</a>
+      <a href="conditions.html">Conditions</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="blog.html">Blog</a>
+      <a href="faq.html">FAQ</a>
+      <a href="contact.html">Contact</a>
+      <a class="cta" href="book.html">Book appointment</a>
+    </nav>
+  </header>
+  <div class="page-head">
+    <div class="eyebrow">Book</div>
+    <h1>Request an appointment</h1>
+    <p>Send me your details and I will confirm a time with you on WhatsApp.</p>
+  </div>
+  <main id="main">
+
+
+    <section id="book" style="padding-top:40px">
+      <div class="visit">
+        <div class="card" style="background:var(--surface);border:1px solid var(--line)">
+          <form id="bookForm">
+            <label for="name">Full name<input id="name" name="name" type="text" autocomplete="name" placeholder="Your name"></label>
+            <label for="phone">Phone number<input id="phone" name="phone" type="tel" autocomplete="tel" placeholder="Include country code"></label>
+            <fieldset style="border:0;padding:0;margin:0"><legend style="font-size:14px;font-weight:600;margin-bottom:6px">Type of consultation</legend>
+              <div class="choice">
+                <label><input type="radio" name="kind" value="In person at the clinic" checked> In person</label>
+                <label><input type="radio" name="kind" value="Online"> Online</label>
+              </div>
+            </fieldset>
+            <label for="when">Preferred day<select id="when" name="when"><option>Any weekday</option><option>Monday</option><option>Tuesday</option><option>Wednesday</option><option>Thursday</option><option>Friday</option><option>Saturday</option></select></label>
+            <label for="time">Preferred time<select id="time" name="time"><option>Any time</option><option>Late morning (11 am to 1 pm)</option><option>Afternoon (1 pm to 4 pm)</option><option>Late afternoon (4 pm to 7 pm)</option></select></label>
+            <label for="concern">What can I help you with?<textarea id="concern" name="concern" placeholder="A few words about your skin, hair or nail concern"></textarea></label>
+            <a class="btn primary" id="waLink" href="https://wa.me/" target="_blank" rel="noopener" style="text-align:center">Continue on WhatsApp</a>
+            <p class="note">The button opens WhatsApp with your message filled in. Nothing is sent until you press send in WhatsApp.</p>
+          </form>
+        </div>
+        <div class="card" style="background:var(--surface);border:1px solid var(--line)">
+          <h3 style="margin-bottom:18px">Clinic details</h3>
+          <dl>
+            <div><dt>Clinic</dt><dd>Zmedspa (MZ Derma Clinics)</dd></div>
+            <div><dt>Address</dt><dd>Klimmat Plaza, Asba and Dantata Street, Gwarinpa 2, Abuja</dd></div>
+            <div><dt>Opening hours</dt><dd>Monday to Saturday, 11:00 am to 7:00 pm</dd></div>
+            <div><dt>Phone and WhatsApp</dt><dd><a href="tel:+2349161036572">0916 103 6572</a></dd></div>
+          </dl>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="cols">
+      <div><strong>Dr. Ismaila Kishim, Dermatology</strong><br>Zmedspa (MZ Derma Clinics)<br>Klimmat Plaza, Asba and Dantata Street, Gwarinpa 2, Abuja<br>Monday to Saturday, 11:00 am to 7:00 pm</div>
+      <div><h4>Pages</h4><a href="about.html">About</a><a href="treatments.html">Treatments</a><a href="conditions.html">Conditions</a><a href="gallery.html">Gallery</a></div>
+      <div><h4>More</h4><a href="blog.html">Blog</a><a href="faq.html">FAQ</a><a href="contact.html">Contact</a><a href="book.html">Book appointment</a></div>
+    </div>
+    <div>Information on this site is general and does not replace a consultation. In an emergency, go to the nearest hospital.</div>
+  </footer>
+</div>
+<a class="wa-float" href="https://wa.me/2349161036572" target="_blank" rel="noopener" aria-label="Chat on WhatsApp"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C6.5 2 2 6.2 2 11.4c0 2.1.8 4.1 2.1 5.7L3 22l5.1-1.6c1.2.5 2.5.7 3.9.7 5.5 0 10-4.2 10-9.7S17.5 2 12 2z"/></svg><span>WhatsApp</span></a>
+<script src="site.js"></script>
+</body>
+</html>
