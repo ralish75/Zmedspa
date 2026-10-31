@@ -2,7 +2,7 @@
 # Before first use: replace OWNER/REPO below with the real GitHub repository.
 backend:
   name: github
-  repo: OWNER/REPO
+  repo: ralish75/Zmedspa
   branch: main
   base_url: https://api.netlify.com
   auth_endpoint: auth

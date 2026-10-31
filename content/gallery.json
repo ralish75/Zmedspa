@@ -2,7 +2,7 @@
   "items": [
     {
       "image": "images/procedure.png",
-      "alt": "Dr. Kishim performing a laser procedure, wearing a mask and protective eyewear",
+      "alt": "Dr. Kishimi performing a laser procedure, wearing a mask and protective eyewear",
       "caption": "A laser procedure"
     },
     {
@@ -12,12 +12,12 @@
     },
     {
       "image": "images/portrait.jpg",
-      "alt": "Dr. Ismaila Kishim in blue scrubs",
-      "caption": "Dr. Ismaila Kishim"
+      "alt": "Dr. Ismaila Kishimi in blue scrubs",
+      "caption": "Dr. Ismaila Kishimi"
     },
     {
       "image": "images/certificate.jpg",
-      "alt": "Dr. Kishim receiving a fellowship certificate at the Institute of Dermatology, Bangkok",
+      "alt": "Dr. Kishimi receiving a fellowship certificate at the Institute of Dermatology, Bangkok",
       "caption": "Fellowship certificate, Institute of Dermatology, Bangkok"
     }
   ]

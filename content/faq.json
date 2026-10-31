@@ -2,7 +2,7 @@
   "items": [
     {
       "question": "Do I need an appointment?",
-      "answer": "Yes. Please request one on the booking page and I will confirm a time with you on WhatsApp."
+      "answer": "Yes. Please request one on the booking page and we will confirm a time with you on WhatsApp."
     },
     {
       "question": "What are the clinic hours?",
@@ -10,7 +10,7 @@
     },
     {
       "question": "Can I have an online consultation?",
-      "answer": "Yes. Choose \"Online\" on the booking form and I will confirm the details with you on WhatsApp. Some problems need an in-person examination, and I will tell you if that is the case."
+      "answer": "Yes. Choose \"Online\" on the booking form and we will confirm the details with you on WhatsApp. Some problems need an in-person examination, and we will tell you if that is the case."
     },
     {
       "question": "Where is the clinic?",
@@ -18,7 +18,7 @@
     },
     {
       "question": "How much does a consultation or treatment cost?",
-      "answer": "Costs depend on the problem and the treatment. Message me on WhatsApp or ask at booking and I will give you a clear figure before you commit."
+      "answer": "Costs depend on the problem and the treatment. Message us on WhatsApp or ask at booking and we will give you a clear figure before you commit."
     },
     {
       "question": "What should I bring to my first visit?",
@@ -26,7 +26,7 @@
     },
     {
       "question": "Do laser and aesthetic treatments need more than one session?",
-      "answer": "Often yes. The number of sessions depends on the treatment and your skin, and I explain this at your consultation."
+      "answer": "Often yes. The number of sessions depends on the treatment and your skin, and we explain this at your consultation."
     },
     {
       "question": "Will my information be kept private?",

@@ -2,7 +2,32 @@
   var WHATSAPP_NUMBER = '2349161036572'; // digits only, with country code, no + or spaces
   var root = document.documentElement;
   var header = document.querySelector('header.top');
-  function onScroll() { header.classList.toggle('scrolled', window.scrollY > 8); }
+  var totop = document.querySelector('.totop');
+  function onScroll() {
+    header.classList.toggle('scrolled', window.scrollY > 8);
+    if (totop) totop.classList.toggle('show', window.scrollY > 500);
+  }
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (totop) totop.addEventListener('click', function () {
+    window.scrollTo({ top: 0, behavior: reduced ? 'auto' : 'smooth' });
+    var brand = document.querySelector('.brand'); if (brand) brand.focus({ preventScroll: true });
+  });
+
+  // Light/dark switch: remembers the visitor's choice, otherwise follows the device setting.
+  var themeBtn = document.querySelector('.theme-btn');
+  function currentTheme() {
+    return root.dataset.theme || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+  }
+  function setTheme(t, save) {
+    root.dataset.theme = t;
+    if (save) { try { localStorage.setItem('theme', t); } catch (e) {} }
+    if (themeBtn) {
+      themeBtn.setAttribute('aria-label', t === 'dark' ? 'Switch to light mode' : 'Switch to dark mode');
+      themeBtn.querySelector('.theme-label').textContent = t === 'dark' ? 'Light' : 'Dark';
+    }
+  }
+  setTheme(currentTheme(), false);
+  if (themeBtn) themeBtn.addEventListener('click', function () { setTheme(currentTheme() === 'dark' ? 'light' : 'dark', true); });
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
 
@@ -19,7 +44,7 @@
   // Scroll animations: reveal elements as they enter the viewport.
   if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
     root.classList.add('js');
-    var targets = document.querySelectorAll('.head, .about-text, .fact, .service, .tile, .detail, .gallery figure, .circles img, .circles-caption, .book-panel .card, .cta-band, .faq details, footer');
+    var targets = document.querySelectorAll('.head, .about-text, .news, .stats, .collage figure, .collage .c4, .fact, .service, .tile, .detail, .gallery figure, .circles img, .circles-caption, .book-panel .card, .cta-band, .faq details, footer');
     targets.forEach(function (el) {
       el.classList.add('reveal');
       var sibs = el.parentElement.children;

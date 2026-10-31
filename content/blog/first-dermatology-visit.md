@@ -5,7 +5,7 @@ summary: "How a consultation works, what to bring, and the questions worth askin
 date: 2026-10-26
 ---
 
-A first visit is mainly a conversation. I want to understand your problem, how long you have had it, and what you have already tried, before I examine your skin, hair or nails.
+A first visit is mainly a conversation. We want to understand your problem, how long you have had it, and what you have already tried, before we examine your skin, hair or nails.
 
 ## What to bring
 
@@ -16,8 +16,8 @@ A first visit is mainly a conversation. I want to understand your problem, how l
 
 ## During the consultation
 
-I ask about your health, allergies and work, then examine the affected area. Sometimes I need a small test, such as a skin scraping or a patch test, to be sure of the diagnosis.
+We ask about your health, allergies and work, then examine the affected area. Sometimes we need a small test, such as a skin scraping or a patch test, to be sure of the diagnosis.
 
 ## Afterwards
 
-I explain what I found in plain language, set out the treatment plan, and tell you what improvement to expect and when to come back. Please ask if anything is unclear.
+We explain what we found in plain language, set out the treatment plan, and tell you what improvement to expect and when to come back. Please ask if anything is unclear.
