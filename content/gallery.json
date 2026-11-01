@@ -1,19 +1,29 @@
 {
   "items": [
     {
-      "image": "images/procedure.png",
-      "alt": "Dr. Kishimi performing a laser procedure, wearing a mask and protective eyewear",
-      "caption": "A laser procedure"
+      "image": "images/doctor-smiling.jpg",
+      "alt": "Dr. Kishimi in green scrubs, smiling while using a tablet in the consulting room",
+      "caption": "In the consulting room"
     },
     {
-      "image": "images/laser-room.jpg",
-      "alt": "Laser machines and a cryotherapy flask in the clinic treatment room",
-      "caption": "The treatment room, with laser machines and cryotherapy"
+      "image": "images/treatment-room-lamp.jpg",
+      "alt": "Treatment room with an examination lamp, treatment bed and procedure chair",
+      "caption": "Treatment room"
     },
     {
-      "image": "images/portrait.jpg",
-      "alt": "Dr. Ismaila Kishimi in blue scrubs",
-      "caption": "Dr. Ismaila Kishimi"
+      "image": "images/laser-machines.jpg",
+      "alt": "Two laser machines beside a cryotherapy flask in front of a striped blind",
+      "caption": "Laser machines and cryotherapy flask"
+    },
+    {
+      "image": "images/lab-equipment.jpg",
+      "alt": "A centrifuge and a gold-coloured treatment machine on a laboratory counter",
+      "caption": "Laboratory equipment"
+    },
+    {
+      "image": "images/reception.jpg",
+      "alt": "Clinic reception with framed certificates and lit product shelves",
+      "caption": "Reception"
     },
     {
       "image": "images/certificate.jpg",

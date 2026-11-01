@@ -3,6 +3,14 @@ const path = require('path');
 const OUT = __dirname;
 // Set LIVE to true at launch (after Dr. Kishimi approves the text) to let search engines index the site.
 const LIVE = false;
+const VIDEOS = {
+  reception: ['videos/video-1.mp4', 'Reception', 'Video panning across the clinic reception, lit product shelves and counter'],
+  door: ['videos/video-2.mp4', 'Consulting room entrance', 'Video of the consulting room door, mirror and bench'],
+  cryo: ['videos/video-3.mp4', 'Cryotherapy flask in the treatment room', 'Video of a cryotherapy flask being handled beside the laser machines'],
+  laser: ['videos/video-4.mp4', 'Laser machines in the treatment room', 'Video of the laser machines and cryotherapy flask in the treatment room'],
+};
+const BGVID = (src) => '<video class="bgvid" muted loop playsinline preload="none" aria-hidden="true" tabindex="-1" disablepictureinpicture data-src="' + src + '"></video>';
+const video = (k) => '<figure class="vid"><video src="' + VIDEOS[k][0] + '#t=0.1" controls playsinline preload="metadata" aria-label="' + VIDEOS[k][2] + '"></video><figcaption>' + VIDEOS[k][1] + '</figcaption></figure>';
 // Newsletter: paste the signup form address from Brevo, MailerLite or similar into action, and the name of its email field.
 // While action is empty the signup block is not shown on the site.
 const NEWSLETTER = { action: '', emailField: 'EMAIL' };
@@ -98,9 +106,9 @@ ${body}
 `;
 }
 
-function head(eyebrow, h1, lead) {
+function head(eyebrow, h1, lead, bg) {
   return `  <div class="page-head">
-    <span class="burst" aria-hidden="true"></span><span class="burst b2" aria-hidden="true"></span>
+    ${bg ? BGVID(bg) : ''}<span class="burst" aria-hidden="true"></span><span class="burst b2" aria-hidden="true"></span>
     <div class="eyebrow">${eyebrow}</div>
     <h1>${h1}</h1>
     <p>${lead}</p>
@@ -165,7 +173,48 @@ const ICONS = {
   allergic: '<rect x="7" y="2.500" width="10" height="19" rx="2.500"/><circle cx="10.200" cy="7.500" r="1.300"/><circle cx="13.800" cy="7.500" r="1.300"/><circle cx="10.200" cy="12" r="1.300"/><circle cx="13.800" cy="12" r="1.300"/><circle cx="10.200" cy="16.500" r="1.300"/><circle cx="13.800" cy="16.500" r="1.300"/>',
   diagnostics: '<circle cx="10.500" cy="10.500" r="6.500"/><path d="M15.500 15.500L21 21"/><path d="M8.500 10.500h4M10.500 8.500v4"/>',
 };
-const icon = (id) => '<svg class="ico" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">' + ICONS[id] + '</svg>';
+const icon = (id) => '<svg class="ico" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">' + ICONS[id].replace(/<(path|circle|rect)/g, '<$1 pathLength="1"') + '</svg>';
+
+// ---------- Fun facts, jokes and the 3D scene ----------
+const FUN = {
+  facts: [
+    'Your skin is your body\u2019s largest organ. In an adult it covers about 1.5 to 2 square metres.',
+    'Your outer layer of skin renews itself about every four weeks, a little more slowly as you get older.',
+    'The skin on your eyelids is among the thinnest on your body, while the skin on your palms and soles is the thickest.',
+    'Fingernails grow about three times as fast as toenails.',
+    'Darker skin has more natural protection from the sun, but it is never fully protected. Everyone benefits from sun care.',
+    'Acne is not caused by dirty skin. Scrubbing harder can irritate your skin and make things worse.',
+    'Goosebumps happen when tiny muscles at the base of each hair pull it upright.',
+    'Your fingerprints form before you are born and stay the same for life.',
+    'Your skin is home to billions of microbes, and most of them help to protect it.',
+  ],
+  jokes: [
+    'Why is a dermatologist never bored? There is always a new rash of things to do.',
+    'Why was sunscreen invited to every party? It always had everyone covered.',
+    'Why was the skin cell so good at its job? It always knew when to shed its past.',
+    'What did the moisturiser say to the serum? Let\u2019s layer our differences aside.',
+    'Why do dermatologists make good detectives? They always get right under the surface.',
+  ],
+};
+const RUNGS = Array.from({ length: 18 }, (_, i) => '<div class="rung" style="--i:' + i + '"><i></i><i></i></div>').join('');
+const CUBE = ['skin', 'cryo', 'laser', 'aesthetic', 'peels', 'scars'].map((k, i) => '<div class="f' + (i + 1) + '">' + icon(k) + '</div>').join('');
+const FUN_SECTION = `
+    <section id="facts">
+      <div class="head"><span class="pill">Skin facts and a smile</span><h2>Did you know?</h2></div>
+      <div class="funwrap">
+        <div class="scene" aria-hidden="true">
+          <div class="helix">${RUNGS}</div>
+          <div class="cube-wrap"><div class="cube">${CUBE}</div></div>
+        </div>
+        <div class="funcard">
+          <div class="fun-stage"><span class="fun-label">Fun fact</span><p class="fun-text" aria-live="polite">${FUN.facts[0]}</p></div>
+          <div class="fun-actions actions"><button class="btn primary" type="button" data-fun="fact">Another fact</button><button class="btn ghost" type="button" data-fun="joke">Tell me a joke</button></div>
+          <script type="application/json" id="fun-data">${JSON.stringify(FUN)}</script>
+        </div>
+      </div>
+    </section>
+
+`;
 
 // ---------- Articles ----------
 const read = (f) => fs.readFileSync(path.join(__dirname, f), 'utf8');
@@ -202,7 +251,7 @@ const articles = fs.readdirSync(path.join(__dirname, 'content/blog')).filter(f =
 // ---------- HOME ----------
 const home = (() => {
   const hero = `  <div class="hero">
-    <span class="burst" aria-hidden="true"></span><span class="burst b2" aria-hidden="true"></span>
+    ${BGVID('videos/video-1.mp4')}<span class="burst" aria-hidden="true"></span><span class="burst b2" aria-hidden="true"></span>
     <div class="hero-copy">
       <div class="eyebrow">Zmedspa &middot; MZ Derma Clinics</div>
       <h1>Dermatology</h1>
@@ -214,7 +263,6 @@ const home = (() => {
       </div>
     </div>
     <div class="hero-photo">
-      <img class="portrait" src="images/portrait.jpg" alt="Dr. Ismaila Kishimi in blue scrubs" width="640" height="800">
       <div class="name-tag"><strong>Dr. Ismaila Kishimi, MBBS, MSc</strong><span>Dermatology and dermatosurgery</span></div>
     </div>
   </div>`;
@@ -236,7 +284,7 @@ const home = (() => {
           <div class="text"><div class="big" style="font-size:2rem">Bangkok</div><div class="desc">Institute of Dermatology, Thailand. Allergic and occupational dermatology, laser and cutaneous surgery.</div></div>
         </div>
         <div class="fact photo">
-          <img src="images/laser-room.jpg" alt="Laser machines and a cryotherapy flask in the clinic treatment room" loading="lazy" width="800" height="1000">
+          <img src="images/reception.jpg" alt="Clinic reception with framed certificates and lit product shelves" loading="lazy" width="607" height="929">
           <small class="top-label">Clinic hours</small>
           <div><div class="big" style="font-size:2.4rem">Mon to Sat</div><div class="desc">11:00 am to 7:00 pm, Gwarinpa 2, Abuja</div></div>
         </div>
@@ -248,10 +296,10 @@ const home = (() => {
       <div class="head"><span class="pill">Treatments</span><h2>What we treat</h2>
         <p class="section-intro">We explain each condition in plain language so you know what to expect before your visit.</p></div>
       <div class="collage">
-        <figure class="c1"><img src="images/laser-room.jpg" alt="Laser machines and a cryotherapy flask in the clinic treatment room" loading="lazy"></figure>
-        <figure class="c2"><img src="images/chemical-peel.jpg" alt="A bowl of peel solution, a flat brush and folded gauze on a pale green surface" loading="lazy"></figure>
+        <figure class="c1"><img src="images/laser-machines.jpg" alt="Two laser machines beside a cryotherapy flask in front of a striped blind" loading="lazy"></figure>
+        <figure class="c2"><img src="images/lab-equipment.jpg" alt="A centrifuge and a gold-coloured treatment machine on a laboratory counter" loading="lazy"></figure>
         <div class="c4">Medical, aesthetic, laser and surgical dermatology under one roof.</div>
-        <figure class="c3"><img src="images/certificate.jpg" alt="Dr. Kishimi receiving a fellowship certificate at the Institute of Dermatology, Bangkok" loading="lazy"></figure>
+        <figure class="c3"><img src="images/treatment-room-lamp.jpg" alt="Treatment room with an examination lamp, treatment bed and procedure chair" loading="lazy"></figure>
       </div>
       <div class="services">
 ${services.map((s, i) => `        <a class="tile" href="treatments.html#${s.id}"><span class="ico-badge">${icon(s.id)}</span><h3>${s.name}</h3><p>${s.blurb}</p><span class="more">Learn more &rarr;</span></a>`).join('\n')}
@@ -263,14 +311,20 @@ ${services.map((s, i) => `        <a class="tile" href="treatments.html#${s.id}"
         <p class="statement"><b>Dermatology, aesthetic medicine</b> and <b>cutaneous surgery</b> in one considered clinic, with care that continues <span>beyond treatment.</span></p></div>
       <div class="circles">
         <img src="images/procedure.png" alt="Dr. Kishimi performing a laser procedure, wearing a mask and protective eyewear" loading="lazy" width="400" height="400">
-        <img src="images/laser-room.jpg" alt="Two laser machines and a cryotherapy flask in the clinic treatment room" loading="lazy" width="800" height="1000">
-        <img src="images/portrait.jpg" alt="Dr. Ismaila Kishimi in blue scrubs" loading="lazy" width="640" height="800">
+        <img src="images/doctor-smiling.jpg" alt="Dr. Kishimi in green scrubs, smiling while using a tablet in the consulting room" loading="lazy" width="607" height="1080">
+        <img src="images/consulting-room-door.jpg" alt="The consulting room door beside a mirror and a bench" loading="lazy" width="607" height="1080">
       </div>
-      <p class="circles-caption">Laser procedures &middot; Laser and cryotherapy equipment &middot; Consultations</p>
+      <p class="circles-caption">Laser procedures &middot; Consultations &middot; The consulting room</p>
       <div class="actions" style="justify-content:center;margin-top:28px"><a class="btn ghost" href="gallery.html">See the gallery</a></div>
     </section>
 
-    <section id="learn">
+    <section id="tour">
+      <div class="head"><span class="pill">Take a look inside</span><h2>Step into the clinic</h2>
+        <p class="section-intro">A short video tour of the reception and the treatment room.</p></div>
+      <div class="videos two">${video('reception')}${video('laser')}</div>
+    </section>
+
+${FUN_SECTION}    <section id="learn">
       <div class="head"><span class="pill">Learn</span><h2>From the blog</h2></div>
       <div class="grid3">
 ${articles.map(a => `        <a class="tile" href="blog-${a.slug}.html"><span class="tag">${a.tag}</span><h3>${a.title}</h3><p>${a.summary}</p><span class="more">Read article &rarr;</span></a>`).join('\n')}
@@ -297,6 +351,16 @@ write('about.html', page({ file: 'about.html', title: 'About Dr. Ismaila Kishimi
   head: head('About the doctor', 'Meet Dr. Ismaila Kishimi', 'A dermatosurgeon who explains every diagnosis and treatment in plain language.'),
   body: `
     <section>
+      <div class="about-split">
+        <aside class="sticker-stage" aria-label="A fun cut-out of Dr. Kishimi">
+          <div class="blob blob-a"></div><div class="blob blob-b"></div>
+          <span class="burst" aria-hidden="true"></span>
+          <button class="bubble" type="button" aria-label="Tap for another message from Dr. Kishimi">Hmm&hellip; is that a rash?</button>
+          <img class="cutout" src="images/doctor-cutout.png" alt="Dr. Kishimi in green scrubs with a hand on his chin, looking thoughtful" width="560" height="459" loading="lazy">
+          <span class="doodle-wrap s1" aria-hidden="true"><svg class="doodle" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.500l2.600 7.900 7.900 2.600-7.900 2.600L12 22.500l-2.600-7.900L1.500 12l7.900-2.600z"/></svg></span><span class="doodle-wrap s2" aria-hidden="true"><svg class="doodle" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.500l2.600 7.900 7.900 2.600-7.900 2.600L12 22.500l-2.600-7.900L1.500 12l7.900-2.600z"/></svg></span><span class="doodle-wrap s3" aria-hidden="true"><svg class="doodle" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.500l2.600 7.900 7.900 2.600-7.900 2.600L12 22.500l-2.600-7.900L1.500 12l7.900-2.600z"/></svg></span>
+          <span class="float fl-1" aria-hidden="true">${icon('skin')}</span><span class="float fl-2" aria-hidden="true">${icon('aesthetic')}</span><span class="float fl-3" aria-hidden="true">${icon('cryo')}</span>
+          <span class="tag-sticker" aria-hidden="true">Certified skin nerd</span>
+        </aside>
       <div class="prose">
         <p>${BIO_P}</p>
         <p>${TEAM_P}</p>
@@ -312,6 +376,7 @@ write('about.html', page({ file: 'about.html', title: 'About Dr. Ismaila Kishimi
         <h2>How we work</h2>
         <p>Every visit begins with listening. We examine the problem, explain what we find, and agree a plan with you. You should leave knowing what is wrong, what the treatment involves and when to come back.</p>
       </div>
+      </div>
       <div class="facts" style="margin-top:44px">
         <div class="fact photo"><img src="images/portrait.jpg" alt="Dr. Ismaila Kishimi in blue scrubs" loading="lazy" width="640" height="800"><small class="top-label">Dermatologist</small><div><div class="big" style="font-size:2.2rem">Dr. Kishimi</div><div class="desc">Dermatology and dermatosurgery</div></div></div>
         <div class="fact cream"><small class="text">Clinical fellowship</small><img src="images/certificate.jpg" alt="Dr. Kishimi receiving a fellowship certificate at the Institute of Dermatology, Bangkok" loading="lazy" width="800" height="799"><div class="text"><div class="big" style="font-size:2rem">Bangkok</div><div class="desc">Institute of Dermatology, Thailand</div></div></div>
@@ -322,7 +387,7 @@ ${cta()}` }));
 
 // ---------- TREATMENTS ----------
 write('treatments.html', page({ file: 'treatments.html', title: 'Dermatology Treatments in Gwarinpa, Abuja | Zmedspa', desc: 'Skin, hair and nail treatments, aesthetic medicine, laser and hair removal, cutaneous surgery and allergic dermatology at Zmedspa, Gwarinpa, Abuja.', flag: true,
-  head: head('Treatments', 'What we treat and how we can help', 'Medical, aesthetic, laser and surgical dermatology under one roof.'),
+  head: head('Treatments', 'What we treat and how we can help', 'Medical, aesthetic, laser and surgical dermatology under one roof.', 'videos/video-3.mp4'),
   body: `
     <section>
 ${services.map((s, i) => `      <div class="detail" id="${s.id}">
@@ -363,12 +428,14 @@ ${cta()}` }));
 
 // ---------- GALLERY ----------
 write('gallery.html', page({ file: 'gallery.html', title: 'Clinic Gallery | Zmedspa', desc: 'Photos of the Zmedspa clinic, laser equipment and procedures in Gwarinpa, Abuja.', flag: false,
-  head: head('Gallery', 'Inside the clinic', 'Treatment room, equipment and procedures.'),
+  head: head('Gallery', 'Inside the clinic', 'Treatment room, equipment and procedures.', 'videos/video-4.mp4'),
   body: `
     <section>
       <div class="gallery">
 ${JSON.parse(read('content/gallery.json')).items.map(g => `        <figure><img src="${g.image}" alt="${g.alt || ''}" loading="lazy"><figcaption>${g.caption || ''}</figcaption></figure>`).join('\n')}
       </div>
+      <div class="head" style="margin-top:56px"><span class="pill">Videos</span><h2>Around the clinic</h2></div>
+      <div class="videos">${video('reception')}${video('door')}${video('cryo')}${video('laser')}</div>
       <p class="note" style="text-align:center;margin-top:24px"><span class="ph">[Before-and-after photos can be added here once patients have given written consent]</span></p>
     </section>
 ${cta()}` }));
@@ -427,7 +494,7 @@ write('book.html', page({ file: 'book.html', title: 'Book an Appointment | Zmeds
           </form>
         </div>
         <div class="card" ${CARD}>
-          <figure class="card-img"><img src="images/consultation.jpg" alt="A dermatologist in a white coat consulting with a patient at a desk in a bright room" loading="lazy"><figcaption>Illustrative image</figcaption></figure>
+          <figure class="card-img"><img src="images/doctor-desk.jpg" alt="Dr. Kishimi seated at the consulting room desk beside a skin analysis device" loading="lazy"><figcaption>The consulting room</figcaption></figure>
           <h3 style="margin-bottom:18px">Clinic details</h3>
           ${DETAILS}
         </div>
@@ -437,7 +504,7 @@ write('book.html', page({ file: 'book.html', title: 'Book an Appointment | Zmeds
 // ---------- CONTACT ----------
 const MAPQ = 'Klimmat%20Plaza%2C%20Asba%20and%20Dantata%20Street%2C%20Gwarinpa%202%2C%20Abuja';
 write('contact.html', page({ file: 'contact.html', title: 'Contact and Directions | Zmedspa', desc: 'Address, opening hours, phone and map for Zmedspa (MZ Derma Clinics), Gwarinpa 2, Abuja.', flag: false,
-  head: head('Contact', 'Visit or contact the clinic', 'Gwarinpa 2, Abuja. Monday to Saturday, 11:00 am to 7:00 pm.'),
+  head: head('Contact', 'Visit or contact the clinic', 'Gwarinpa 2, Abuja. Monday to Saturday, 11:00 am to 7:00 pm.', 'videos/video-2.mp4'),
   body: `
     <section id="contact" style="padding-top:40px">
       <div class="visit">
@@ -450,6 +517,11 @@ write('contact.html', page({ file: 'contact.html', title: 'Contact and Direction
           <div class="map" style="margin-top:0"><iframe title="Map of the clinic in Gwarinpa 2, Abuja" src="https://maps.google.com/maps?q=${MAPQ}&amp;z=16&amp;output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe><a href="https://www.google.com/maps/search/?api=1&amp;query=${MAPQ}" target="_blank" rel="noopener">Open in Google Maps</a></div>
         </div>
       </div>
+    </section>
+    <section>
+      <div class="head"><span class="pill">Before you visit</span><h2>Look inside</h2>
+        <p class="section-intro">See the reception and the consulting room entrance so you know where to go.</p></div>
+      <div class="videos two">${video('reception')}${video('door')}</div>
     </section>` }));
 
 // ---------- 404 ----------
